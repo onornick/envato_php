@@ -8,17 +8,35 @@
 <body>
     <h1>Recommended books</h1>
     <?php 
-    $books = [
-        "The River and The Source",
-        "Kifo Kisimani",
-        "Rich Dad Poor Dad",
-        "Shamba la Wanyama"
+    $books = array(
+        [
+            'name' => 'The River abnd The Source',
+            'author' => 'Mary Akoth',
+            'releaseYear' => 2013,
+            'purchaseUrl' => 'https://rats.co.ke'
+        ],
+        [
+            'name' => 'The River abnd The Source Vol. 2',
+            'author' => 'Mariah Akoth',
+            'releaseYear' => 2011,
+            'purchaseUrl' => 'https://ratsvol2.co.ke'
+        ]
+    );?>
 
-    ];?>
+    <?php function filterByAuthor($books, $author) {
+        $dict = [];
+        foreach ($books as $book) {
+            if ($book['author'] === $author) {
+                $dict[] = $book;
+            }
+        }
+        return $dict;
+    }
+    ?>
 
-    <?php foreach($books as $book) : ?>
-        <li> <?php echo "$book"; ?> </li>
-    <?php endforeach ?>
+    <?php foreach(filterByAuthor($books, 'Mary Akoth') as $book) : ?>
+        <p>The book, <?=$book['name']?>, was written by <?=$book["author"]?> in the year <?= $book['releaseYear']?>. You can purchase it from <a href="<?php $book['purchaseUrl']?>">Here</a></p>
+    <?php endforeach?>
 
 </body>
 </html>
